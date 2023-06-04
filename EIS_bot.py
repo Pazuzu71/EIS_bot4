@@ -4,7 +4,7 @@ import asyncio
 from aiogram import Bot, Dispatcher
 
 
-from handlers import other
+from handlers import other, user
 from config_data import Config
 
 
@@ -20,6 +20,7 @@ async def main():
     # TODO сделать главное меню с хэлпом
 
     # подключаем роутеры
+    dp.include_router(user.router)
     dp.include_router(other.router)
 
     # очищаем очередь апдейтов, запускаем поулинг
