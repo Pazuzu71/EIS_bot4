@@ -5,6 +5,7 @@ from aiogram import Bot, Dispatcher
 
 
 from handlers import other, user
+from keyboards.main_menu import set_main_menu
 from config_data import Config
 
 
@@ -17,7 +18,8 @@ async def main():
     bot: Bot = Bot(token=TOKEN, parse_mode='HTML')
     dp: Dispatcher = Dispatcher()
 
-    # TODO сделать главное меню с хэлпом
+    # создаем главное меню
+    await set_main_menu(bot)
 
     # подключаем роутеры
     dp.include_router(user.router)
