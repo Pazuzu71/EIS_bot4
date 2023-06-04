@@ -3,5 +3,7 @@ COMMANDS: dict[str: str] = {
 }
 
 REPLIES: dict[str: str] = {
-'/help': 'Это бот поиска xml файлов на ftp. Просто введите реестровый номер документа в ЕИС.'
+    '/help': 'Это бот поиска xml файлов на ftp. Просто введите реестровый номер документа в ЕИС.',
+    'doctype_choose': 'Выберите тип документа',
+    'doctypes_lst': ['notification', 'protocol', 'contract', 'contractProcedure']
 }
