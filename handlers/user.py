@@ -5,6 +5,7 @@ from aiogram.filters import CommandStart, Command
 
 from filters.EisDocNo import IsEisDocNo, IsTenderPlan2020EisDocNo
 from lexicon.dictionaries import REPLIES
+from keyboards.generation import create_kb
 
 
 router: Router = Router()
@@ -32,5 +33,5 @@ async def get_eis_docno(msg: Message):
 # Этот хэндлер сработает на корректный реестровый номер документа (кроме плана-графика)
 @router.message(IsEisDocNo())
 async def get_eis_docno(msg: Message):
-    await msg.reply(text=REPLIES['doctype_choose'])
+    await msg.reply(text=REPLIES['doctype_choose'], reply_markup=create_kb(*REPLIES['doctypes'], width=2))
 
