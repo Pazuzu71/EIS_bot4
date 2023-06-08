@@ -7,6 +7,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from handlers import other, user
 from keyboards.main_menu import set_main_menu
+from utils.funcs import create_dir
 from config_data import Config
 
 
@@ -14,6 +15,9 @@ TOKEN = Config.load_config().tgbot.token
 
 
 async def main():
+
+    # Создаем папку темп, если ее нет. Она будет нужна для скачиваемых и временных файлов.
+    create_dir('temp')
 
     # инициализируем хранилище
     storage: MemoryStorage = MemoryStorage()

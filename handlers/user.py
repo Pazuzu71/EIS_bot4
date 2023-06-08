@@ -2,7 +2,7 @@ from aiogram import Router, Bot
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import CommandStart, Command, Text, StateFilter
 from aiogram.fsm.context import FSMContext
-# from aiogram.fsm.state import default_state
+from aiogram.fsm.state import default_state
 
 
 from filters.EisDocNo import IsEisDocNo, IsTenderPlan2020EisDocNo
@@ -39,7 +39,7 @@ async def get_eis_docno(msg: Message):
 
 # TODO Надо делать машину состояний, чтобы после выбора типа документа из словаря сразу иметь его номер в ЕИС
 # Этот хэндлер сработает на корректный реестровый номер документа (кроме плана-графика)
-@router.message(IsEisDocNo(), StateFilter(Add.fill_eisdocno))
+@router.message(IsEisDocNo(), StateFilter(Add.fill_eisdocno, default_state))
 async def get_eis_docno(msg: Message, state: FSMContext):
     await state.update_data(user_id=msg.from_user.id)
     await state.update_data(message_id=msg.message_id)
@@ -60,6 +60,7 @@ async def get_notification(call: CallbackQuery, state: FSMContext, bot: Bot):
     answ = await Search(dct['eisdocno']).get_notification_publication_date()
     await call.message.answer(text=answ)
     await call.message.answer(text=str(dct))
+    await state.clear()
 
 
 # Этот хэндлер сработает на протоколы
